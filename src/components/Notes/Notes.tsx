@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { BiSave, BiEditAlt, BiTrash } from "react-icons/bi";
-import { VscDiscard } from "react-icons/vsc";
+import { BiSave } from "react-icons/bi";
 import { Button } from "@components/common/Button";
 import { Textarea } from "@components/common/TextArea";
 import { Note } from "@/types";
