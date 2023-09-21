@@ -4,6 +4,9 @@ import useLocalStorage from "@/hooks/useLocalStorage";
 import { City } from "@/types";
 import { HomeSkeleton } from "./HomeSkeleton";
 import { WeatherCardList } from "@components/WeatherCardList";
+import { toast } from "react-toastify";
+import { SECOND } from "@/utils";
+let shownErrorToast = false;
 
 const Home = () => {
   const [favoriteCities, setFavoriteCities] = useLocalStorage<City[]>(
@@ -72,8 +75,16 @@ const Home = () => {
     return <HomeSkeleton />;
   }
 
-  if (isError) {
-    return <div>Something went wrong</div>;
+  if (isError && !shownErrorToast) {
+    toast.error(
+      "Something went wrong, Please check your internet connection.",
+      {
+        position: "top-right",
+        toastId: "Home",
+        autoClose: 10 * SECOND,
+      }
+    );
+    shownErrorToast = true;
   }
 
   const filteredTopPopulatedCitiesWeather = topPopulatedCitiesWeather?.filter(

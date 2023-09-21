@@ -1,5 +1,4 @@
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import { router } from "./router";
 import { RouterProvider } from "react-router-dom";
 
@@ -7,15 +6,20 @@ import reportWebVitals from "./reportWebVitals";
 import { QueryClient } from "@tanstack/react-query";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ToastContainer } from "react-toastify";
+import { MINUTE } from "@/utils";
+import "./index.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: false,
       networkMode: "offlineFirst",
-      onError(error) {
-        console.error(error);
-      },
+      retry: Infinity,
+      refetchOnReconnect: true,
+      refetchInterval: 5 * MINUTE,
+      cacheTime: Infinity,
     },
   },
 });
@@ -33,16 +37,14 @@ root.render(
       persister,
       dehydrateOptions: {
         shouldDehydrateQuery: (query) => {
-          // Check if the browser is online
-          const isOnline = navigator.onLine;
-
-          // Allow dehydrating if online, otherwise, don't dehydrate
-          return isOnline;
+          return !!query.state.data;
         },
       },
     }}
   >
+    {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     <RouterProvider router={router} />
+    <ToastContainer />
   </PersistQueryClientProvider>
 );
 

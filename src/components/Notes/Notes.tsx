@@ -4,6 +4,7 @@ import { VscDiscard } from "react-icons/vsc";
 import { Button } from "@components/common/Button";
 import { Textarea } from "@components/common/TextArea";
 import { Note } from "@/types";
+import { NoteItem } from "./NoteItem";
 interface NotesSectionProps {
   notes: Note[] | undefined;
   onSaveNote: (note: string) => void;
@@ -40,14 +41,19 @@ const Notes: React.FC<NotesSectionProps> = ({
     setNote("");
   };
 
+  const onEditNoteClick = (noteId: string, content: string) => {
+    setEditNoteId(noteId);
+    setEditedNote(content);
+  };
+
   return (
     <div className="w-full space-y-2">
       <h1 className="text-3xl font-semibold text-gray-700 dark:text-gray-200">
         Notes
       </h1>
-      <div className="flex items-end rounded bg-slate-100 p-1 dark:bg-slate-800">
+      <div className="flex items-end rounded bg-slate-100 p-1 dark:bg-secondary">
         <Textarea
-          className="w-full resize-none bg-transparent dark:bg-transparent"
+          className="w-full resize-none bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
           placeholder="Write some notes"
           rows={2}
           value={note}
@@ -55,7 +61,7 @@ const Notes: React.FC<NotesSectionProps> = ({
         />
         <Button
           variant="ghost"
-          className="p-0 text-3xl"
+          className="p-0 text-3xl text-primary"
           onClick={handleSaveNote}
         >
           <BiSave />
@@ -64,61 +70,17 @@ const Notes: React.FC<NotesSectionProps> = ({
 
       <div className="flex flex-wrap justify-center gap-2">
         {notes?.map((note) => (
-          <div
-            className="flex w-[calc(50%-4px)] items-end rounded bg-slate-100 p-1 dark:bg-slate-800"
+          <NoteItem
             key={note.id}
-          >
-            <Textarea
-              className="w-full resize-none bg-transparent dark:bg-transparent"
-              rows={2}
-              cols={5}
-              id={note.id}
-              value={editNoteId === note.id ? editedNote : note.content}
-              readOnly={editNoteId !== note.id}
-              onChange={(e) => setEditedNote(e.target.value)}
-            />
-
-            <div>
-              {editNoteId === note.id ? (
-                <div className="flex gap-2">
-                  <Button
-                    variant="ghost"
-                    className="p-0 text-3xl outline-none "
-                    onClick={handleUpdateNote}
-                  >
-                    <BiSave />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    className="p-0 text-3xl"
-                    onClick={handleCancelEdit}
-                  >
-                    <VscDiscard />
-                  </Button>
-                </div>
-              ) : (
-                <div className="flex gap-2">
-                  <Button
-                    variant="ghost"
-                    className="p-0 text-3xl text-blue-500 dark:text-blue-500 dark:hover:text-blue-700"
-                    onClick={() => {
-                      setEditNoteId(note.id);
-                      setEditedNote(note.content);
-                    }}
-                  >
-                    <BiEditAlt />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    className="p-0 text-3xl text-red-500 dark:text-red-500 dark:hover:text-red-700"
-                    onClick={() => onDeleteNote(note.id)}
-                  >
-                    <BiTrash />
-                  </Button>
-                </div>
-              )}
-            </div>
-          </div>
+            note={note}
+            onEditNote={onEditNoteClick}
+            onDeleteNote={onDeleteNote}
+            onCancelEdit={handleCancelEdit}
+            onUpdateNote={handleUpdateNote}
+            setEditedNote={setEditedNote}
+            isEditing={editNoteId === note.id}
+            editedNote={editedNote}
+          />
         ))}
       </div>
     </div>

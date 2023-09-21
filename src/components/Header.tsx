@@ -19,7 +19,7 @@ const Header: React.FC = () => {
     setValue("");
     navigate({
       pathname: "/city",
-      search: `?lat=${option.lat}&lng=${option.lng}`,
+      search: `?lat=${option.lat.toFixed(2)}&lng=${option.lng.toFixed(2)}`,
     });
   };
 
@@ -43,7 +43,7 @@ const Header: React.FC = () => {
 
   return (
     <header>
-      <div className="flex justify-between dark:text-white ">
+      <div className="flex justify-between text-primary ">
         <Link to="/">
           <h1 className="text-3xl">React Weather</h1>
         </Link>

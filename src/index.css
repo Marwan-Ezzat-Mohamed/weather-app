@@ -7,3 +7,20 @@
   display: flex;
   flex-direction: column;
 }
+
+:root {
+  --color-primary: #e2e8f0;
+  --color-secondary: #f1f5f9;
+  --color-tertiary: #d1d5db;
+
+  --color-text-primary: black;
+  --color-text-secondary: white;
+}
+
+.dark {
+  --color-primary: #0f172a; /*primary*/
+  --color-secondary: #1e293b; /*secondary*/
+  --color-tertiary: #6b7280; /*tertiary*/
+  --color-text-primary: white; /*text-primary*/
+  --color-text-secondary: black; /*text-secondary*/
+}

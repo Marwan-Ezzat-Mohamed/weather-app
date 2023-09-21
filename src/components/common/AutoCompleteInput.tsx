@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { Input } from "./Input";
+import { cn } from "@/utils";
 
 type IAutoCompleteInputProps<T> = {
   value: string;
@@ -33,10 +34,8 @@ const AutoCompleteInput = <T,>(props: IAutoCompleteInputProps<T>) => {
     const handleClickOutside = (e: MouseEvent) => {
       //if the click is outside the input and the options
       if (
-        inputRef.current &&
-        !inputRef.current.contains(e.target as Node) &&
-        optionsRef.current &&
-        !optionsRef.current.contains(e.target as Node)
+        !inputRef.current?.contains(e.target as Node) &&
+        !optionsRef.current?.contains(e.target as Node)
       ) {
         setIsOptionsShown(false);
       }
@@ -65,14 +64,15 @@ const AutoCompleteInput = <T,>(props: IAutoCompleteInputProps<T>) => {
       {props.options.length > 0 && (
         <div
           ref={optionsRef}
-          className={`absolute z-10 mt-2 flex w-full appearance-none flex-col rounded-md bg-white shadow-lg dark:bg-gray-800 ${
-            !isOptionsShown ? "hidden" : ""
-          }`}
+          className={cn(
+            "absolute z-10 mt-2 flex w-full appearance-none flex-col rounded-md bg-secondary shadow-lg",
+            isOptionsShown ? "block" : "hidden"
+          )}
         >
           {props.options.map((option) => (
             <div
               key={option.id}
-              className="flex w-full cursor-pointer  px-2 py-1  hover:bg-gray-100 dark:hover:bg-gray-700"
+              className="hover:bg-tertiary flex w-full cursor-pointer bg-secondary px-2 py-1"
               onClick={() => handleOptionClick(option)}
             >
               {option.name}

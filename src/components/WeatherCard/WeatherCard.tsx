@@ -43,7 +43,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
   return (
     <div
       onClick={handleCardClick}
-      className="min-w-sm relative flex w-full max-w-sm cursor-pointer justify-center rounded-2xl bg-slate-100 p-5 transition duration-200 hover:scale-105 hover:shadow-2xl dark:bg-slate-800"
+      className="min-w-sm bg-secondary 0 relative flex w-full max-w-sm cursor-pointer justify-center rounded-2xl p-5 transition duration-200 hover:scale-105 hover:shadow-2xl "
     >
       <div className="w-full space-y-5">
         <div className="flex justify-between">

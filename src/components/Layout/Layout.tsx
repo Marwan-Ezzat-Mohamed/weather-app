@@ -37,7 +37,7 @@ export default function Layout() {
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="ui-theme">
-      <div className="relative flex flex-grow flex-col items-center bg-slate-200 text-black dark:bg-slate-900 dark:text-white">
+      <div className="relative flex flex-grow flex-col items-center bg-primary text-primary">
         <div className="w-full max-w-5xl py-5">
           <Header />
           <div className="m-2 md:m-0">

@@ -17,7 +17,7 @@ const WeatherForecastItem = ({
   return (
     <div
       key={time}
-      className="flex w-[90px] flex-col items-center rounded-2xl p-2 shadow-xl dark:bg-slate-900/70"
+      className="bg-primary flex w-[90px] flex-col items-center rounded-2xl p-2 shadow-xl"
     >
       <div className="text-center text-xl">{formattedTime}</div>
       <div className="flex justify-center">

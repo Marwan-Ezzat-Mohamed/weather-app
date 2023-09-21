@@ -4,12 +4,13 @@ import { v4 as uuidv4 } from "uuid";
 import Notes from "@components/Notes";
 import { WeatherDetailsCard } from "@components/WeatherDetailsCard";
 import { WeatherDetailsSkeleton } from "./WeatherDetailsSkeleton";
-import { mapServerResponseToWeatherToProps } from "@/utils";
+import { SECOND, mapServerResponseToWeatherToProps } from "@/utils";
 import { useRouterQuery } from "@hooks/useRouterQuery";
 import useLocalStorage from "@hooks/useLocalStorage";
 import { getWeather } from "@/services";
 import { City, Note } from "@/types";
-
+import { toast } from "react-toastify";
+let shownErrorToast = false;
 const WeatherDetails = () => {
   const [notes, setNotes] = useLocalStorage<Record<string, Note[]>>(
     "notes",
@@ -26,8 +27,9 @@ const WeatherDetails = () => {
 
   const {
     isInitialLoading: weatherIsInitialLoading,
+    isLoading: weatherIsLoading,
     error: weatherError,
-    data: weather,
+    data: weather = null,
   } = useQuery({
     queryKey: ["forecast", lat, lng],
     queryFn: () =>
@@ -35,6 +37,7 @@ const WeatherDetails = () => {
         lat: Number(lat),
         lng: Number(lng),
       }),
+    retry: 1,
     enabled: !!lat && !!lng,
   });
 
@@ -112,20 +115,29 @@ const WeatherDetails = () => {
     [weather, favoriteCities, handleFavoriteClick]
   );
 
-  if (weatherIsInitialLoading) {
+  if (weatherIsInitialLoading || weatherIsLoading) {
     return <WeatherDetailsSkeleton />;
   }
-  if (!weatherDetailsCardProps || !weather || weatherError) {
-    return <div>Something went wrong</div>;
+
+  if (weatherError && !shownErrorToast) {
+    toast.error(
+      "Something went wrong, Please check your internet connection.",
+      {
+        position: "top-right",
+        toastId: "weatherError",
+        autoClose: 20 * SECOND,
+      }
+    );
+    shownErrorToast = true;
   }
 
   return (
     <div className="mt-5 flex w-full flex-col justify-between">
       <div className="min-w-3xl flex w-full max-w-3xl flex-col flex-wrap items-center justify-center gap-5 self-center">
-        <WeatherDetailsCard {...weatherDetailsCardProps} />
+        <WeatherDetailsCard {...weatherDetailsCardProps!} />
 
         <Notes
-          notes={notes[weather.id]}
+          notes={notes[weather!.id]}
           onSaveNote={handleSaveNote}
           onEditNote={handleEditNote}
           onDeleteNote={handleDeleteNote}

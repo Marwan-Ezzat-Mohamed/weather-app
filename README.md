@@ -1,46 +1,57 @@
-# Getting Started with Create React App
+### Assignment Version Number: FE-2023-04-ii
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Api choices
 
-## Available Scripts
+- For getting the top 15 largest cities in the world by population i could have used a static array of the top 15 cities but i decided to use an api to get the data which is more dynamic and can be updated easily
+  **api url: http://api.geonames.org/**
 
-In the project directory, you can run:
+another reason i used this api is because it has an auto complete feature which is very useful for the user
 
-### `npm start`
+- For getting the weather data i used the weatherapi.com api as it provides free forecast data for 3 days and allow 1M requests per month
+  unlike the weatherstack api which only allows 1000 requests per month which is not enough for testing purposes
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Libraries
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- to call the api i used the **axios** as it handles the errors very well and it is very easy to use
 
-### `npm test`
+- for the data caching for offline use i used the **tanstack react-query** library as it is very easy to use and it has a lot of features like caching, refetching, pagination, etc. it uses the latest result from the cache and refetches in the when the user is online and it refetches the data every 5 minutes
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- for the styling i used the **tailwindcss** library as it is very easy to use and it has a lot of features like dark mode, responsive design, etc.
 
-### `npm run build`
+- for the icons i used the **react-icons** library as it has a lot of icons
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Testing
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- for testing i used the **jest** library as it is very easy to use and it has a lot of features like snapshot testing, etc.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## How to run the project
 
-### `npm run eject`
+- clone the project
+- run `npm install` to install the dependencies
+- run `npm start` to start the project
+- run `npm test` to run the tests
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+or you can visit the deployed version on netlify [here](https://weather-app-ahmed.netlify.app/)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Screenshots
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### dark mode
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- home page
+  ![dark home](./screenshots/dark-mode-home.jpeg)
 
-## Learn More
+- search results
+  ![dark search](./screenshots/dark-mode-search.jpeg)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- weather details and notes
+  ![dark search results](./screenshots/dark-mode-weather-details.jpeg)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### light mode
+
+- home page
+  ![light home](./screenshots/light-mode-home.jpeg)
+
+- weather details and notes
+  ![light search](./screenshots/light-mode-weather-details.jpeg)
+
+#
