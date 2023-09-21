@@ -39,6 +39,7 @@ const NoteItem: React.FC<NoteItemProps> = ({
         value={isEditing ? editedNote : note.content}
         disabled={!isEditing}
         onChange={(e) => setEditedNote(e.target.value)}
+        data-testid={`textarea-${note.id}`}
       />
 
       <div>
@@ -48,6 +49,7 @@ const NoteItem: React.FC<NoteItemProps> = ({
               variant="ghost"
               className="p-0 text-3xl"
               onClick={onUpdateNote}
+              data-testid={`save-note-${note.id}`}
             >
               <BiSave />
             </Button>
@@ -55,6 +57,7 @@ const NoteItem: React.FC<NoteItemProps> = ({
               variant="ghost"
               className="p-0 text-3xl"
               onClick={onCancelEdit}
+              data-testid={`cancel-edit-${note.id}`}
             >
               <VscDiscard />
             </Button>
@@ -67,6 +70,7 @@ const NoteItem: React.FC<NoteItemProps> = ({
               onClick={() => {
                 onEditNote(note.id, note.content);
               }}
+              data-testid={`edit-note-${note.id}`}
             >
               <BiEditAlt />
             </Button>
@@ -74,6 +78,7 @@ const NoteItem: React.FC<NoteItemProps> = ({
               variant="ghost"
               className="p-0 text-3xl text-red-500 dark:text-red-500 dark:hover:text-red-700"
               onClick={() => onDeleteNote(note.id)}
+              data-testid={`delete-note-${note.id}`}
             >
               <BiTrash />
             </Button>

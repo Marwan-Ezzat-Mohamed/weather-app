@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WeatherCardSkeleton matches snapshot 1`] = `
+<div>
+  <div
+    class="min-w-sm relative flex w-full max-w-sm animate-pulse justify-center rounded-2xl bg-secondary p-5 "
+  >
+    <div
+      class="w-full space-y-5"
+    >
+      <div
+        class="flex justify-between"
+      >
+        <span
+          class="bg-tertiary h-7 w-2/3 animate-pulse rounded"
+        />
+        <div
+          class="flex gap-2"
+        >
+          <div
+            class="h-7 w-7 animate-pulse "
+          />
+        </div>
+      </div>
+      <div
+        class="flex items-center justify-between"
+      >
+        <div
+          class="flex items-center justify-center gap-2"
+        >
+          <div
+            class="bg-tertiary h-24 w-24 animate-pulse rounded-full"
+          />
+          <span
+            class="bg-tertiary h-20 w-24 animate-pulse rounded"
+          />
+        </div>
+        <div
+          class="flex items-center justify-center"
+        >
+          <span
+            class="bg-tertiary h-7 w-20 animate-pulse rounded font-bold"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

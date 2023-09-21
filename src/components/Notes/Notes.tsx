@@ -63,6 +63,7 @@ const Notes: React.FC<NotesSectionProps> = ({
           variant="ghost"
           className="p-0 text-3xl text-primary"
           onClick={handleSaveNote}
+          data-testid="save-note"
         >
           <BiSave />
         </Button>
