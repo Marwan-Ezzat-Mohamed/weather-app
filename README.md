@@ -1,57 +1,57 @@
-### Assignment Version Number: FE-2023-04-ii
+# Assignment Version Number: FE-2023-04-ii
 
-## Api choices
+## API Choices
 
-- For getting the top 15 largest cities in the world by population i could have used a static array of the top 15 cities but i decided to use an api to get the data which is more dynamic and can be updated easily
-  **api url: http://api.geonames.org/**
+So, for this assignment, I had to fetch data about the top 15 largest cities in the world by population. I had a choice here: I could have simply used a static array of these top 15 cities, but I decided to take a more dynamic approach and went with using an API to obtain this data. The API I used for this purpose can be found at the following URL: [http://api.geonames.org/](http://api.geonames.org/).
 
-another reason i used this api is because it has an auto complete feature which is very useful for the user
+One of the main reasons I opted for this API was its handy auto-complete feature, which I believed would greatly enhance the user experience.
 
-- For getting the weather data i used the weatherapi.com api as it provides free forecast data for 3 days and allow 1M requests per month
-  unlike the weatherstack api which only allows 1000 requests per month which is not enough for testing purposes
+Now, when it came to fetching weather data, I chose to work with the weatherapi.com API. This API offered a couple of appealing features, including providing free forecast data for 3 days and allowing 1 million requests per month. In comparison, another option I considered, the weatherstack API, only allowed 1000 requests per month, which I found insufficient for testing purposes.
 
 ## Libraries
 
-- to call the api i used the **axios** as it handles the errors very well and it is very easy to use
+In terms of libraries, here's what I used:
 
-- for the data caching for offline use i used the **tanstack react-query** library as it is very easy to use and it has a lot of features like caching, refetching, pagination, etc. it uses the latest result from the cache and refetches in the when the user is online and it refetches the data every 5 minutes
+- To make API calls, I relied on **axios**. It's a dependable choice, handling errors gracefully and boasting user-friendly usage.
 
-- for the styling i used the **tailwindcss** library as it is very easy to use and it has a lot of features like dark mode, responsive design, etc.
+- For data caching to enable offline functionality, I turned to **tanstack react-query**. This library is a breeze to work with, offering features such as caching, refetching, and pagination. It's smart enough to use cached results when available and automatically refetches data when the user is online, refreshing the cache every 5 minutes.
 
-- for the icons i used the **react-icons** library as it has a lot of icons
+- For styling, I went with **tailwindcss**. This library is an absolute gem, known for its ease of use and packed with useful features like dark mode and responsive design, didn't use any components library.
+
+- When it came to icons, I used **react-icons**, which offers an extensive collection of icons.
 
 ## Testing
 
-- for testing i used the **jest** library as it is very easy to use and it has a lot of features like snapshot testing, etc.
+To ensure the reliability of the application, I employed **jest** and wrote unit tests for the most components.
 
-## How to run the project
+## How to Run the Project
 
-- clone the project
-- run `npm install` to install the dependencies
-- run `npm start` to start the project
-- run `npm test` to run the tests
+To get this project up and running, follow these simple steps:
 
-or you can visit the deployed version on netlify [here](https://weather-app-ahmed.netlify.app/)
+1. Clone the project to your local environment.
+2. Run `npm install` to install all the necessary dependencies.
+3. Execute `npm start` to launch the project.
+4. For running tests, use `npm test`.
+
+Alternatively, you can also access the deployed version of the project on Netlify by clicking [here](https://weather-app-ahmed.netlify.app/).
 
 ## Screenshots
 
-### dark mode
+### Dark Mode
 
-- home page
-  ![dark home](./screenshots/dark-mode-home.jpeg)
+- **Home Page**
+  ![Dark Home](./screenshots/dark-mode-home.jpeg)
 
-- search results
-  ![dark search](./screenshots/dark-mode-search.jpeg)
+- **Search Results**
+  ![Dark Search](./screenshots/dark-mode-search.jpeg)
 
-- weather details and notes
-  ![dark search results](./screenshots/dark-mode-weather-details.jpeg)
+- **Weather Details and Notes**
+  ![Dark Search Results](./screenshots/dark-mode-weather-details.jpeg)
 
-### light mode
+### Light Mode
 
-- home page
-  ![light home](./screenshots/light-mode-home.jpeg)
+- **Home Page**
+  ![Light Home](./screenshots/light-mode-home.jpeg)
 
-- weather details and notes
-  ![light search](./screenshots/light-mode-weather-details.jpeg)
-
-#
+- **Weather Details and Notes**
+  ![Light Search](./screenshots/light-mode-weather-details.jpeg)
