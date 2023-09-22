@@ -56,7 +56,7 @@ const Notes: React.FC<NotesSectionProps> = ({
           placeholder="Write some notes"
           rows={2}
           value={note}
-          onChange={(e) => setNote(e.target.value)}
+          onChange={(e) => setNote(e.target.value.trim())}
         />
         <Button
           variant="ghost"
