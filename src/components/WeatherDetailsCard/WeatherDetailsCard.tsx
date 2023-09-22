@@ -50,9 +50,9 @@ const WeatherDetailsCard = ({
   const formattedDate = formatDate(localTime);
 
   const filteredWeatherHour = weatherHour.filter((w) => {
-    //get the next 7 hours from now (including the current hour) and not the past ones
+    //get the next 6 hours from now (including the current hour)
     const time = new Date(w.time).getTime();
-    const now = new Date().getTime();
+    const now = new Date(localTime).getTime();
     return time >= now && time <= now + FORECAST_HOURS * HOUR;
   });
 
@@ -88,7 +88,7 @@ const WeatherDetailsCard = ({
   );
 
   return (
-    <div className="bg-secondary relative flex  w-full justify-center rounded-2xl p-5 transition duration-200 hover:shadow-xl">
+    <div className="relative flex w-full  justify-center rounded-2xl bg-secondary p-5 transition duration-200 hover:shadow-xl">
       <div
         className="absolute bottom-0 left-0 m-2 text-4xl text-yellow-500"
         onClick={onFavoriteClick}

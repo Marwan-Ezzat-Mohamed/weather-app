@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { Header } from "@components/Header";
 import { ThemeProvider } from "@components/ThemeProvider";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function Layout() {
+  const [isLocationLoading, setIsLocationLoading] = useState(false);
   const navigate = useNavigate();
 
   async function getLocation() {
@@ -16,18 +18,34 @@ export default function Layout() {
     });
 
     const goToCity = () => {
-      navigator.geolocation.getCurrentPosition((position) => {
-        navigate({
-          pathname: "/city",
-          search: `?lat=${position.coords.latitude}&lng=${position.coords.longitude}`,
-        });
-      });
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setIsLocationLoading(false);
+          navigate({
+            pathname: "/city",
+            search: `?lat=${position.coords.latitude.toFixed(
+              2
+            )}&lng=${position.coords.longitude.toFixed(2)}`,
+          });
+        },
+        () => {
+          setIsLocationLoading(false);
+        },
+        {
+          enableHighAccuracy: true,
+        }
+      );
     };
 
-    permissionStatus.onchange = () =>
-      permissionStatus.state === "granted" && goToCity();
+    permissionStatus.onchange = () => {
+      //request permission again
+      if (permissionStatus.state === "granted") {
+        setIsLocationLoading(true);
+        goToCity();
+      }
+    };
 
-    permissionStatus.state === "prompt" && goToCity();
+    navigator.geolocation.getCurrentPosition(() => {});
   }
 
   useEffect(() => {
@@ -38,12 +56,16 @@ export default function Layout() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="ui-theme">
       <div className="relative flex flex-grow flex-col items-center bg-primary text-primary">
-        <div className="w-full max-w-5xl py-5">
-          <Header />
-          <div className="m-2 md:m-0">
-            <Outlet />
+        {isLocationLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <div className="w-full max-w-5xl py-5">
+            <Header />
+            <div className="m-2 md:m-0">
+              <Outlet />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </ThemeProvider>
   );

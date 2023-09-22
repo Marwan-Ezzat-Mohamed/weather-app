@@ -18,6 +18,9 @@ const WeatherCardList = ({
   if (isLoading) return <WeatherCardListSkeleton />;
   if (!weatherData || weatherData.length === 0) return null;
 
+  weatherData.sort((a, b) => {
+    return a.location.name.localeCompare(b.location.name);
+  });
   return (
     <section className="flex flex-col gap-5">
       <span>

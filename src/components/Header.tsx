@@ -29,14 +29,8 @@ const Header: React.FC = () => {
         setOptions([]);
         return;
       }
-      const geoname = await getCitiesByName(debouncedValue);
-      const x = geoname.map((city) => ({
-        name: city.name + ", " + city.adminName1 + ", " + city.countryName,
-        id: city.geonameId.toString(),
-        lat: Number(city.lat),
-        lng: Number(city.lng),
-      })) as City[];
-      setOptions(x);
+      const autoCompleteOptions = await getCitiesByName(debouncedValue);
+      setOptions(autoCompleteOptions);
     };
     getOptions();
   }, [debouncedValue]);

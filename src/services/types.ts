@@ -1,27 +1,44 @@
-export interface GeoNamesResponse {
-  totalResultsCount: number;
-  geonames: Geoname[];
+export interface GetTopPopulatedCitiesResponse {
+  total_count: number;
+  results: ResultCity[];
 }
 
-export interface Geoname {
-  adminCode1: string;
-  lng: string;
-  geonameId: number;
-  toponymName: string;
-  countryId: string;
-  fcl: string;
-  population: number;
-  countryCode: string;
+interface ResultCity {
+  geoname_id: string;
   name: string;
-  fclName: string;
-  adminCodes1: {
-    ISO3166_2: string;
-  };
-  countryName: string;
-  fcodeName: string;
-  adminName1: string;
-  lat: string;
-  fcode: string;
+  ascii_name: string;
+  alternate_names: string[];
+  feature_class: string;
+  feature_code: string;
+  country_code: string;
+  cou_name_en: string;
+  country_code_2?: any;
+  admin1_code: string;
+  admin2_code?: string;
+  admin3_code?: any;
+  admin4_code?: any;
+  population: number;
+  elevation?: any;
+  dem: number;
+  timezone: string;
+  modification_date: string;
+  label_en: string;
+  coordinates: Coordinates;
+}
+
+interface Coordinates {
+  lon: number;
+  lat: number;
+}
+
+export interface ServerCity {
+  id: number;
+  name: string;
+  region: string;
+  country: string;
+  lat: number;
+  lon: number;
+  url: string;
 }
 
 export interface GetWeatherForecastResponse {
