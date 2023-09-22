@@ -16,13 +16,25 @@ const WeatherCardList = ({
   label,
 }: WeatherCardListProps) => {
   if (isLoading) return <WeatherCardListSkeleton />;
-  if (!weatherData || weatherData.length === 0) return null;
+  if (!weatherData || weatherData.length === 0) {
+    if (label.includes("Favorite")) {
+      return (
+        <section className="flex flex-col gap-5">
+          <h1 className="text-3xl font-bold">{label}</h1>
+          <h1 className="text-md font-bold">
+            Use the search bar to add cities to your favorites
+          </h1>
+        </section>
+      );
+    }
+    return null;
+  }
 
   weatherData.sort((a, b) => {
     return a.location.name.localeCompare(b.location.name);
   });
   return (
-    <section className="flex flex-col gap-5">
+    <section className="flex w-full flex-col gap-5">
       <span>
         <h1 className="text-3xl font-bold">{label}</h1>
       </span>

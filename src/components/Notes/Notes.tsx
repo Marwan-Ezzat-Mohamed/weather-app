@@ -68,7 +68,7 @@ const Notes: React.FC<NotesSectionProps> = ({
         </Button>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-2">
+      <div className="flex flex-wrap justify-start gap-2">
         {notes?.map((note) => (
           <NoteItem
             key={note.id}

@@ -90,7 +90,7 @@ const WeatherDetailsCard = ({
   return (
     <div className="relative flex w-full  justify-center rounded-2xl bg-secondary p-5 transition duration-200 hover:shadow-xl">
       <div
-        className="absolute bottom-0 left-0 m-2 text-4xl text-yellow-500"
+        className="absolute bottom-0 left-0 m-2 cursor-pointer text-4xl text-yellow-500"
         onClick={onFavoriteClick}
         data-testid="favorite-icon"
       >
