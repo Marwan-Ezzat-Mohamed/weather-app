@@ -38,7 +38,7 @@ const NoteItem: React.FC<NoteItemProps> = ({
         id={note.id}
         value={isEditing ? editedNote : note.content}
         disabled={!isEditing}
-        onChange={(e) => setEditedNote(e.target.value.trim())}
+        onChange={(e) => setEditedNote(e.target.value)}
         data-testid={`textarea-${note.id}`}
       />
 

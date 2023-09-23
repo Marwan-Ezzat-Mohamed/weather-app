@@ -42,7 +42,8 @@ const WeatherDetails = () => {
   });
 
   const handleSaveNote = (note: string) => {
-    if (!weather || !note) return;
+    const trimmedNote = note.trim();
+    if (!weather || !trimmedNote) return;
     setNotes((prev) => {
       return {
         ...prev,
@@ -50,7 +51,7 @@ const WeatherDetails = () => {
           ...(prev[weather.id] || []),
           {
             id: uuidv4(),
-            content: note,
+            content: trimmedNote,
           },
         ],
       };
@@ -68,6 +69,7 @@ const WeatherDetails = () => {
   };
 
   const handleEditNote = (noteId: string, content: string) => {
+    const trimmedNote = content.trim();
     if (!weather) return;
     setNotes((prev) => {
       return {
@@ -76,7 +78,7 @@ const WeatherDetails = () => {
           if (note.id === noteId) {
             return {
               ...note,
-              content,
+              content: trimmedNote,
             };
           }
           return note;

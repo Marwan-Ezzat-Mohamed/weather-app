@@ -6,7 +6,7 @@ import {
   ServerCity,
 } from "./types";
 
-const WEATHER_API_KEY = "aafa135c4bb0429399f201536231609";
+const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 const AUTO_COMPLETE_API_URL = `https://api.weatherapi.com/v1/search.json?key=${WEATHER_API_KEY}`;
 const WEATHER_API_URL = `https://api.weatherapi.com/v1/forecast.json?key=${WEATHER_API_KEY}`;
 
