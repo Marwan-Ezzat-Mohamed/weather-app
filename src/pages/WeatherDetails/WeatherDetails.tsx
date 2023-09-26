@@ -11,6 +11,7 @@ import { getWeather } from "@/services";
 import { City, Note } from "@/types";
 import { toast } from "react-toastify";
 let shownErrorToast = false;
+
 const WeatherDetails = () => {
   const [notes, setNotes] = useLocalStorage<Record<string, Note[]>>(
     "notes",
@@ -24,6 +25,8 @@ const WeatherDetails = () => {
   const routerQuery = useRouterQuery();
   const lat = routerQuery.get("lat");
   const lng = routerQuery.get("lng");
+  const isQueryParamsValid =
+    !isNaN(Number(lat)) && !isNaN(Number(lng)) && !!lat && !!lng;
 
   const {
     isInitialLoading: weatherIsInitialLoading,
@@ -38,7 +41,7 @@ const WeatherDetails = () => {
         lng: Number(lng),
       }),
     retry: 1,
-    enabled: !!lat && !!lng,
+    enabled: isQueryParamsValid,
   });
 
   const handleSaveNote = (note: string) => {
@@ -117,20 +120,32 @@ const WeatherDetails = () => {
     [weather, favoriteCities, handleFavoriteClick]
   );
 
+  console.log({ weather, weatherError });
+
+  if (!isQueryParamsValid) {
+    toast.error("Invalid query params", {
+      position: "top-right",
+      toastId: "invalidQueryParams",
+      autoClose: 5 * SECOND,
+    });
+
+    return null;
+  }
+
   if (weatherIsInitialLoading || weatherIsLoading) {
     return <WeatherDetailsSkeleton />;
   }
 
-  if (weatherError && !shownErrorToast) {
-    toast.error(
-      "Something went wrong, Please check your internet connection.",
-      {
+  if (weatherError) {
+    if (!shownErrorToast) {
+      toast.error("Something went wrong", {
         position: "top-right",
         toastId: "weatherError",
-        autoClose: 20 * SECOND,
-      }
-    );
-    shownErrorToast = true;
+        autoClose: 10 * SECOND,
+      });
+      shownErrorToast = true;
+    }
+    return null;
   }
 
   return (
