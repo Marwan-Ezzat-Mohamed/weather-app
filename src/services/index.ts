@@ -64,7 +64,9 @@ export const getWeather = async (
   if (typeof city === "string") {
     query = `${WEATHER_API_URL}&q=${city}&days=3&aqi=no&alerts=no`;
   } else {
-    query = `${WEATHER_API_URL}&q=${city.lat},${city.lng}&days=3&aqi=no&alerts=no`;
+    query = `${WEATHER_API_URL}&q=${city.lat.toFixed(2)},${city.lng.toFixed(
+      2
+    )}&days=3&aqi=no&alerts=no`;
   }
 
   const data = await fetchData<GetWeatherForecastResponse>(query);
@@ -75,11 +77,19 @@ export const getWeather = async (
   return data;
 };
 
-export const getBulkWeather = async (
-  cities: City[]
-): Promise<GetWeatherForecastResponse[]> => {
+export const getBulkWeather = async (cities: City[]) => {
   const promises = cities.map((city) =>
     getWeather({ lat: city.lat, lng: city.lng })
   );
-  return Promise.all(promises);
+  const p = Promise.allSettled(promises);
+  const results = await p;
+  console.log(results);
+  const data = results
+    .filter((result) => result.status === "fulfilled")
+    .map((result) => {
+      const value =
+        result as PromiseFulfilledResult<GetWeatherForecastResponse>;
+      return value.value;
+    });
+  return data;
 };
