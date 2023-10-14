@@ -13,11 +13,21 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const formatDate = (localtime: string) => {
+  const date = new Date(localtime);
+  const isDateValid = !isNaN(date.getTime());
+  if (!isDateValid) {
+    //return now if date is invalid
+    return new Intl.DateTimeFormat("en-US", {
+      weekday: "short",
+      hour: "numeric",
+      minute: "numeric",
+    }).format();
+  }
   return new Intl.DateTimeFormat("en-US", {
     weekday: "short",
     hour: "numeric",
     minute: "numeric",
-  }).format(new Date(localtime));
+  }).format(date);
 };
 
 export const isAppOnline = async () => {

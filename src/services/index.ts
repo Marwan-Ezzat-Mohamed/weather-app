@@ -46,15 +46,17 @@ export const getCitiesByName = async (
 ): Promise<City[]> => {
   const url = `${AUTO_COMPLETE_API_URL}&q=${query}`;
   const data = await fetchData<ServerCity[]>(url);
-  return data.map(
-    (city) =>
-      ({
-        id: city.id.toString(),
-        name: city.name + ", " + city.region + ", " + city.country,
-        lat: Number(city.lat),
-        lng: Number(city.lon),
-      }) as City
-  );
+  return data
+    .map(
+      (city) =>
+        ({
+          id: city.id.toString(),
+          name: city.name + ", " + city.region + ", " + city.country,
+          lat: Number(city.lat.toFixed(2)),
+          lng: Number(city.lon.toFixed(2)),
+        }) as City
+    )
+    .slice(0, limit);
 };
 
 export const getWeather = async (

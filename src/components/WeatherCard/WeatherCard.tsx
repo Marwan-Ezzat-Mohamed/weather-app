@@ -26,6 +26,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
 }) => {
   const navigate = useNavigate();
 
+  console.log({localTime})
   const formattedDate = formatDate(localTime);
 
   const handleIconClick = (e: React.MouseEvent) => {

@@ -138,11 +138,10 @@ const WeatherDetailsCard = ({
           </h1>
           <div className="flex flex-wrap justify-center gap-5">
             {filteredWeatherHour?.map((w) => {
-              const time = new Date(w.time).getTime();
               const formattedTime = new Intl.DateTimeFormat("en-US", {
                 hour: "numeric",
                 hour12: true,
-              }).format(time);
+              }).format(new Date(w.time));
               return (
                 <WeatherForecastItem
                   weather={{
